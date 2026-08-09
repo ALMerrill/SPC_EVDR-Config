@@ -13,9 +13,8 @@ config GPIO_PCA95XX
     default y
     
 config ZMK_DISPLAY
-  select LVGL_USE_IMG
-  # default y
-  
+  default y
+
 choice ZMK_DISPLAY_STATUS_SCREEN
         default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
 endchoice
@@ -23,6 +22,15 @@ endchoice
 if ZMK_DISPLAY
 
 config SSD1306
+	default y
+
+config ZMK_WIDGET_OUTPUT_STATUS
+	default y
+
+config ZMK_WIDGET_LAYER_STATUS
+	default y
+
+config ZMK_WIDGET_BATTERY_STATUS
 	default y
 
 endif # ZMK_DISPLAY
