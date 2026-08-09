@@ -151,16 +151,15 @@
 // |  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  | 
 // |A sft|S win|D alt|F ctl|  G  |  H  |J ctl|K alt|L win|' sft| 
 // |Z sft|  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |  ;  |
-// |     |     |xxxxx| Nav | Spc/| Ent | Sym |xxxxx|     |     |
-//                           Num
+// |ctl/T|alt/E|xxxxx|gui/E| Spc/|Bspc/| Nav |xxxxx|alt/T|ctl/E|
+//        Tab   Ret         Esc    Num    Sym
 // -------------------------------     -------------------------------
             bindings = <
                 &kp C_MUTE
                 &kp Q       &kp W       &kp E       &kp R       &kp T     &kp Y       &kp U       &kp I       &kp O       &kp P
                 &hm LSHFT A &hm LGUI S  &hm LALT D  &hm LCTRL F &kp G     &kp H       &hm RCTRL J &hm RALT K  &hm RGUI L  &hm RSHFT QUOT
                 &hm LSHFT Z &kp X       &kp C       &kp V       &kp B     &kp N       &kp M       &kp COMMA   &kp DOT     &kp SEMI
-//                &none       &none           &lt NUM_L SPACE       &mo NAV_L           &lt SYM_L RET         &none       &none
-                &none       &none                &mo NAV_L   &lt NUM_L SPACE   &kp RET     &mo SYM_L              &none       &none 
+                &mt LCTRL TAB &mt LALT RET       &mt LGUI ESC &lt NUM_L SPACE   &mo NAV_L     &lt SYM_L BSPC              &mt RALT TAB       &mt RCTRL RET
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
         };
@@ -168,17 +167,17 @@
         sym_layer {
             label = " Symbol";
 // -------------------------------     -------------------------------
-// |  `  |  ^  |  @  |  $  |  ~  |  -  |     |     |     |     |     | 
-// |  &  |  !  |  +  |  _  |  #  |     |pg up| ctrl| ralt| gui | sft | 
-// |  |  |  ?  |  -  |  %  |     |  -  |pg dn|     |     |     |     | 
-// |     |     |xxxxx|     |     |     |     |     |xxxxx|     |     |
+// |  !  |  @  |  #  |  $  |  %  |  ^  |  &  |  *  |  (  |  )  |
+// |     |     |     |  ~  |  `  |  +  |  =  |  {  |  }  |  |  |
+// |Undo |Cut  |Copy |Paste|     |  -  |  _  |  [  |  ]  |     |
+// |     |     |xxxxx|     |     |     |     |xxxxx|     |     |
 // -------------------------------     -------------------------------
             bindings = <
-                &kp C_MUTE 
-                &kp GRAVE   &kp CARET   &kp AT      &kp DOLLAR  &kp TILDE               &none       &none       &none       &none       &none
-                &kp AMPS    &kp EXCL    &kp PLUS    &kp UNDER   &kp HASH                &kp PG_UP   &kp RCTRL   &kp RALT    &kp RGUI    &kp RSHFT
-                &kp PIPE    &kp QMARK   &kp MINUS   &kp PERCENT &none                   &kp PG_DN   &none       &none       &none       &none
-                &none       &none                   &none       &none                   &none       &none                   &none       &none 
+                &kp C_MUTE
+                &kp EXCL    &kp AT      &kp HASH    &kp DOLLAR  &kp PERCENT             &kp CARET   &kp AMPS    &kp ASTRK   &kp LPAR    &kp RPAR
+                &trans      &trans      &trans      &kp TILDE   &kp GRAVE               &kp PLUS    &kp EQUAL   &kp LBRC    &kp RBRC    &kp PIPE
+                &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)   &trans                  &kp MINUS   &kp UNDER   &kp LBKT    &kp RBKT    &trans
+                &trans      &trans                  &trans      &trans                  &trans      &trans                  &trans      &trans
             >;
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
@@ -190,13 +189,14 @@
 // | sft | gui | alt | ctrl|     |     |home |left |down |right| end | 
 // |     |     |     |     |     |  -  |     |prev | play|stop | next| 
 // |     |     |xxxxx|     |     |     |     |     |xxxxx|     |     |
+// C-Tab / C-S-Tab on the outer thumb keys (browser/editor tab cycling)
 // -------------------------------     -------------------------------
             bindings = <
-                &kp C_MUTE 
+                &kp C_MUTE
                 &none       &none       &none       &none       &none                   &none       &kp PG_UP   &kp UP      &kp PG_DN   &kp DEL
                 &kp LSHFT   &kp LGUI    &kp LALT    &kp LCTRL   &none                   &kp HOME    &kp LEFT    &kp DOWN    &kp RIGHT   &kp END
                 &none       &none       &none       &none       &none                   &none       &none       &none       &none       &none
-                &none       &none                   &none       &none                   &none       &none                   &none       &none 
+                &kp LC(LS(TAB)) &trans              &trans      &trans                  &trans      &trans                  &trans      &kp LC(TAB)
             >;
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
@@ -214,7 +214,7 @@
                 &none       &kp F9      &kp F10     &kp F11     &kp F12                 &kp KP_PLUS &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_SLASH 
                 &none       &kp F5      &kp F6      &kp F7      &kp F8                  &kp KP_N0   &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_DOT
                 &none       &kp F1      &kp F2      &kp F3      &kp F4                  &kp KP_MINUS &kp KP_N1  &kp KP_N2   &kp KP_N3   &kp KP_MULTIPLY
-                &none       &none                   &none       &none                   &kp KP_EQUAL &kp KP_ENTER           &none       &none 
+                &trans      &trans                  &trans      &trans                  &kp KP_EQUAL &kp KP_ENTER           &trans      &trans
             >;
             sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
@@ -222,17 +222,17 @@
         cfg_layer {
             label = " Configuration";
 // -------------------------------     -------------------------------
-// |     |     |     |     |     |  -  | USB | BLE |     |     |BTCLR| 
-// |     |     |     |     |     |     |     |     |     |     |     | 
-// |numlk|PSCRN|     |     |     |  -  | BT0 | BT1 | BT2 | BT3 | BT4 | 
+// |     |     |     |     |     |  -  | USB | BLE |     |     |BTCLR|
+// |Studio|WS1 | WS2 | WS3 | WS4 |  -  | WS5 |     |     |     |     |
+// |numlk|PSCRN|     |     |     |  -  | BT0 | BT1 | BT2 | BT3 | BT4 |
 // |     |     |xxxxx|     |     |     |     |     |xxxxx|     |     |
 // -------------------------------     -------------------------------
             bindings = <
                 &none
                 &kp C       &none       &sys_reset   &none         &bootloader               &out OUT_USB &out OUT_BLE &none        &none        &bt BT_CLR
-                &studio_unlock &none    &none        &none         &none                   &none        &none        &none        &none        &none
+                &studio_unlock &kp LG(N1) &kp LG(N2) &kp LG(N3)    &kp LG(N4)              &kp LG(N5)   &none        &none        &none        &none
                 &kp KP_NUM  &kp PSCRN   &none        &none         &none                   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
-                &none       &none                    &none         &none                   &none        &none                     &none        &none 
+                &none       &none                    &none         &none                   &none        &none                     &none        &none
             >;
         };
     };
