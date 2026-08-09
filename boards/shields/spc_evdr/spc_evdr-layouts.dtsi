@@ -1,0 +1,62 @@
+/*
+ * Copyright (c) 2022 @weteor
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <physical_layouts.dtsi>
+
+/ {
+    default_layout: default_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
+        // Positions/widths measured from the PCB (rows 0-2 and the two outer
+        // keys of row 3 sit on an exact 19.05mm/1u grid; the four center
+        // bottom-row keys use the 1u/1.75u/1.75u/1u widths from
+        // plate_1u_1.75u_1.75u_1u.stl). Purely cosmetic for ZMK Studio's
+        // display - doesn't affect the actual key mapping.
+        keys  //                       w    h    x     y   rot   rx   ry
+            = <&key_physical_attrs 100 100  450 (-100)   0    0    0>  // encoder click (position 0)
+            , <&key_physical_attrs 100 100    0    0     0    0    0>  // row0 col0
+            , <&key_physical_attrs 100 100  100    0     0    0    0>  // row0 col1
+            , <&key_physical_attrs 100 100  200    0     0    0    0>  // row0 col2
+            , <&key_physical_attrs 100 100  300    0     0    0    0>  // row0 col3
+            , <&key_physical_attrs 100 100  400    0     0    0    0>  // row0 col4
+            , <&key_physical_attrs 100 100  500    0     0    0    0>  // row0 col5
+            , <&key_physical_attrs 100 100  600    0     0    0    0>  // row0 col6
+            , <&key_physical_attrs 100 100  700    0     0    0    0>  // row0 col7
+            , <&key_physical_attrs 100 100  800    0     0    0    0>  // row0 col8
+            , <&key_physical_attrs 100 100  900    0     0    0    0>  // row0 col9
+            , <&key_physical_attrs 100 100    0  100     0    0    0>  // row1 col0
+            , <&key_physical_attrs 100 100  100  100     0    0    0>  // row1 col1
+            , <&key_physical_attrs 100 100  200  100     0    0    0>  // row1 col2
+            , <&key_physical_attrs 100 100  300  100     0    0    0>  // row1 col3
+            , <&key_physical_attrs 100 100  400  100     0    0    0>  // row1 col4
+            , <&key_physical_attrs 100 100  500  100     0    0    0>  // row1 col5
+            , <&key_physical_attrs 100 100  600  100     0    0    0>  // row1 col6
+            , <&key_physical_attrs 100 100  700  100     0    0    0>  // row1 col7
+            , <&key_physical_attrs 100 100  800  100     0    0    0>  // row1 col8
+            , <&key_physical_attrs 100 100  900  100     0    0    0>  // row1 col9
+            , <&key_physical_attrs 100 100    0  200     0    0    0>  // row2 col0
+            , <&key_physical_attrs 100 100  100  200     0    0    0>  // row2 col1
+            , <&key_physical_attrs 100 100  200  200     0    0    0>  // row2 col2
+            , <&key_physical_attrs 100 100  300  200     0    0    0>  // row2 col3
+            , <&key_physical_attrs 100 100  400  200     0    0    0>  // row2 col4
+            , <&key_physical_attrs 100 100  500  200     0    0    0>  // row2 col5
+            , <&key_physical_attrs 100 100  600  200     0    0    0>  // row2 col6
+            , <&key_physical_attrs 100 100  700  200     0    0    0>  // row2 col7
+            , <&key_physical_attrs 100 100  800  200     0    0    0>  // row2 col8
+            , <&key_physical_attrs 100 100  900  200     0    0    0>  // row2 col9
+            , <&key_physical_attrs 100 100    0  300     0    0    0>  // row3 col0
+            , <&key_physical_attrs 100 100  100  300     0    0    0>  // row3 col1
+            , <&key_physical_attrs 100 100  200  300     0    0    0>  // row3 col3
+            , <&key_physical_attrs 175 100  300  300     0    0    0>  // row3 col4 (space)
+            , <&key_physical_attrs 175 100  475  300     0    0    0>  // row3 col5 (enter)
+            , <&key_physical_attrs 100 100  650  300     0    0    0>  // row3 col6
+            , <&key_physical_attrs 100 100  800  300     0    0    0>  // row3 col8
+            , <&key_physical_attrs 100 100  900  300     0    0    0>  // row3 col9
+            ;
+    };
+};

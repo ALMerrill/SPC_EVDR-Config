@@ -40,7 +40,7 @@ jobs:
       - name: West Build (SPC_EVDR Xiao SAMD)
         run: west build -s zmk/app -b seeeduino_xiao -d build/spc_evdr_xiao_samd -- -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DSHIELD=spc_evdr
       - name: West Build (SPC_EVDR Xiao BLE)
-        run: west build -s zmk/app -b xiao_ble -d build/spc_evdr_xiao_ble -- -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DSHIELD=spc_evdr -DCONFIG_ZMK_BLE=y
+        run: west build -s zmk/app -b xiao_ble -d build/spc_evdr_xiao_ble -S studio-rpc-usb-uart -- -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DSHIELD=spc_evdr -DCONFIG_ZMK_BLE=y -DCONFIG_ZMK_STUDIO=y
       - name: SPC_EVDR .config
         if: ${{ always() }}
         run: cat -n build/spc_evdr_xiao_ble/zephyr/.config
