@@ -30,8 +30,34 @@
 	};
 
 	kscan0: kscan {
-		compatible = "zmk,kscan-gpio-matrix";
+		compatible = "zmk,kscan-composite";
 		label = "KSCAN";
+		rows = <4>;
+		columns = <10>;
+
+		expander {
+			kscan = <&kscan0_expander>;
+			row-offset = <0>;
+			col-offset = <0>;
+		};
+
+		native {
+			kscan = <&kscan0_native>;
+			row-offset = <0>;
+			col-offset = <8>;
+		};
+	};
+
+	// Columns 0-7 live on the PCA9555 I2C GPIO expander; columns 8-9 are
+	// native XIAO GPIO pins. Scanning them as one zmk,kscan-gpio-matrix
+	// mixed the slow I2C-backed columns with fast native ones, which was
+	// corrupting reads on column 8 (O / L / .). Splitting into two
+	// homogeneous matrices combined via zmk,kscan-composite (the pattern
+	// ZMK itself uses for boards with I2C GPIO expanders, e.g. the Ferris
+	// rev02's MCP23017 half) keeps each scan loop's timing consistent.
+	kscan0_expander: kscan_expander {
+		compatible = "zmk,kscan-gpio-matrix";
+		label = "KSCAN_EXPANDER";
 
 		diode-direction = "col2row";
 		col-gpios
@@ -43,7 +69,22 @@
 			, <&col_io 5 GPIO_ACTIVE_HIGH>
 			, <&col_io 6 GPIO_ACTIVE_HIGH>
 			, <&col_io 7 GPIO_ACTIVE_HIGH>
-			, <&xiao_d 6 GPIO_ACTIVE_HIGH>
+			;
+		row-gpios
+			= <&xiao_d 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+			, <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+			, <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+			, <&xiao_d 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+			;
+	};
+
+	kscan0_native: kscan_native {
+		compatible = "zmk,kscan-gpio-matrix";
+		label = "KSCAN_NATIVE";
+
+		diode-direction = "col2row";
+		col-gpios
+			= <&xiao_d 6 GPIO_ACTIVE_HIGH>
 			, <&xiao_d 3 GPIO_ACTIVE_HIGH>
 			;
 		row-gpios
